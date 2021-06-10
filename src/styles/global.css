@@ -1,0 +1,8 @@
+/* ./src/styles/global.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.strava-orange {
+    background-color: #fc4c02
+}
