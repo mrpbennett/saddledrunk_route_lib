@@ -17,46 +17,37 @@ export const query = graphql`
 const Route = (props) => {
   const [route, setRoute] = useState([]);
   const [athlete, setAthlete] = useState([]);
-  const [accessToken, setAccessToken] = useState([]);
 
   useEffect(() => {
-    axios({
-      method: 'POST',
-      url: process.env.GATSBY_STRAVA_AUTH_URL,
-      params: {
-        client_id: process.env.GATSBY_STRAVA_CLIENT_ID,
-        client_secret: process.env.GATSBY_STRAVA_CLIENT_SECRET,
-        grant_type: 'refresh_token',
-        refresh_token: process.env.GATSBY_STRAVA_REFRESH_TOKEN,
-      },
-    })
-      .then((response) => {
-        setAccessToken(response.data.access_token);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+    const init = async () => {
+      try {
+        const firstResponse = await axios({
+          method: 'POST',
+          url: 'https://www.strava.com/oauth/token',
+          params: {
+            client_id: process.env.GATSBY_STRAVA_CLIENT_ID,
+            client_secret: process.env.GATSBY_STRAVA_CLIENT_SECRET,
+            grant_type: 'refresh_token',
+            refresh_token: process.env.GATSBY_STRAVA_REFRESH_TOKEN,
+          },
+        });
+        const token = firstResponse.data.access_token;
+        const secondResponse = await axios({
+          method: 'GET',
+          url: `https://www.strava.com/api/v3/routes/${props.data.contentfulRoutes.slug}`,
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
 
-  useEffect(() => {
-    var getRouteConfig = {
-      method: 'get',
-      url: `https://www.strava.com/api/v3/routes/${props.data.contentfulRoutes.slug}`,
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
+        setRoute(secondResponse.data);
+        setAthlete(secondResponse.data.athlete);
+      } catch (e) {
+        console.log(e);
+      }
     };
 
-    axios(getRouteConfig)
-      .then((res) => {
-        console.log(res);
-        setRoute(res.data);
-        setAthlete(res.data.athlete);
-        // setSegment(res.data.segments);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    init();
   }, []);
 
   const distanceMiles = route.distance / 1609;
