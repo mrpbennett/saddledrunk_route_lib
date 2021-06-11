@@ -150,7 +150,7 @@ const Route = (props) => {
             </div>
 
             <div id='description'>
-              <p>{route.description}</p>
+              <p className='new-line'>{route.description}</p>
             </div>
           </div>
         </div>

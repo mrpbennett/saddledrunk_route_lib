@@ -43,8 +43,12 @@ const Layout = ({ children }) => {
       <div className='container mx-auto prose flex-grow'>
         <main>{children}</main>
       </div>
-      <footer>
+      <footer className='mt-10'>
         <div className='container mx-auto py-3'>
+          <img
+            src='https://images.squarespace-cdn.com/content/v1/5bc434afe5f7d17e4e03dd45/1541524382144-ZCB4KX1RFBKV2552QI98/ke17ZwdGBToddI8pDm48kFGbdAAi3Th4NssaNgenDvSoCXeSvxnTEQmG4uwOsdIceAoHiyRoc52GMN5_2H8Wp8A7mP0jgkJI_DnilIhhO0XBcjEMZAMrPDJlp2aVH_LUv2PmWvXrjtdhIg1rUfLrbQ/SD-medium.jpg?format=300w'
+            className='block mr-auto ml-auto mb-2 w-12'
+          />
           <p className='text-xs text-center'>
             Copyright © {new Date().getFullYear()} SaddleDrunk CC <br />
             Intoxicated with the Freedom of Cycling - MMXXI

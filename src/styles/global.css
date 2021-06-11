@@ -6,3 +6,6 @@
 .strava-orange {
     background-color: #fc4c02
 }
+.new-line {
+    white-space: pre-wrap;
+}
