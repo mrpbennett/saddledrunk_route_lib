@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, graphql } from 'gatsby';
 
 import Layout from '../components/layout';
@@ -12,7 +12,7 @@ export const query = graphql`
           routename
           ridetype
           destination
-          rating
+          ratingInt
           slug
         }
       }
@@ -43,9 +43,17 @@ const RouteList = (props) => {
                 <td>
                   <Link to={`/route/${node.slug}`}>{node.routename}</Link>
                 </td>
-                <td>{node.ridetype}</td>
-                <td>{node.destination}</td>
-                <td>{node.rating}</td>
+                <td className='capitalize'>{node.ridetype}</td>
+                <td className='capitalize'>{node.destination}</td>
+                <td>
+                  {[...Array(node.ratingInt)].map(() => {
+                    return (
+                      <span role='img' alt='star' className='mr-2'>
+                        👍
+                      </span>
+                    );
+                  })}
+                </td>
               </tr>
             );
           })}

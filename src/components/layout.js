@@ -25,7 +25,9 @@ const Layout = ({ children }) => {
           <div className='mx-auto px-2 px-10'>
             <div className='relative flex items-center justify-between h-20'>
               <div className='mr-auto'>
-                <span className='text-white font-bold'>SaddleDrunk Route Library</span>
+                <Link to='/' className='text-white font-bold hover:text-yellow-200'>
+                  SaddleDrunk Route Library
+                </Link>
               </div>
 
               <div className='flex'>

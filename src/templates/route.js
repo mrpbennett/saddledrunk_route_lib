@@ -80,8 +80,8 @@ const Route = (props) => {
         <div className='grid grid-cols-2 gap-10'>
           <div id='map'>
             <img
-              src={`https://maps.googleapis.com/maps/api/staticmap?size=799x350&maptype=roadmap&path=enc:${route.map.summary_polyline}&key=${process.env.GATSBY_GOOGLE_MAP_KEY}`}
-              className='rounded-md shadow-md'
+              src={`https://maps.googleapis.com/maps/api/staticmap?size=1000x350&maptype=roadmap&path=enc:${route.map.summary_polyline}&key=${process.env.GATSBY_GOOGLE_MAP_KEY}`}
+              className='rounded-md shadow-md w-full'
             />
             {/* 
             <div>
