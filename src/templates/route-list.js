@@ -27,7 +27,7 @@ const RouteList = (props) => {
     <Layout>
       <SEO title='Routes' />
 
-      <table classNAme='table-auto'>
+      <table className='table-auto'>
         <thead>
           <tr>
             <th>Some Witty Name</th>

@@ -17,14 +17,33 @@ export const query = graphql`
 const Route = (props) => {
   const [route, setRoute] = useState([]);
   const [athlete, setAthlete] = useState([]);
-  // const [segments, setSegment] = useState([]);
+  const [accessToken, setAccessToken] = useState([]);
+
+  useEffect(() => {
+    axios({
+      method: 'POST',
+      url: process.env.GATSBY_STRAVA_AUTH_URL,
+      params: {
+        client_id: process.env.GATSBY_STRAVA_CLIENT_ID,
+        client_secret: process.env.GATSBY_STRAVA_CLIENT_SECRET,
+        grant_type: 'refresh_token',
+        refresh_token: process.env.GATSBY_STRAVA_REFRESH_TOKEN,
+      },
+    })
+      .then((response) => {
+        setAccessToken(response.data.access_token);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   useEffect(() => {
     var getRouteConfig = {
       method: 'get',
       url: `https://www.strava.com/api/v3/routes/${props.data.contentfulRoutes.slug}`,
       headers: {
-        Authorization: `Bearer ${process.env.GATSBY_STRAVA_BEARER}`,
+        Authorization: `Bearer ${accessToken}`,
       },
     };
 
