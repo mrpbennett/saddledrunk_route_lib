@@ -8,12 +8,13 @@ const data = [
   {
     to: '/',
     name: 'home',
-    className: 'mr-10 text-white capitalize',
+    className:
+      'mr-10 text-white capitalize py-2 px-4 rounded  hover:bg-yellow-200 hover:text-black hover:rounded',
   },
   {
     to: '/route',
     name: 'Routes',
-    className: 'text-white capitalize',
+    className: 'text-white capitalize py-2 px-4 rounded hover:bg-yellow-200 hover:text-black hover:rounded',
   },
 ];
 
@@ -25,7 +26,7 @@ const Layout = ({ children }) => {
           <div className='mx-auto px-2 px-10'>
             <div className='relative flex items-center justify-between h-20'>
               <div className='mr-auto'>
-                <Link to='/' className='text-white font-bold hover:text-yellow-200'>
+                <Link to='/' className='text-white font-bold hover:text-yellow-200 hidden md:inline'>
                   SaddleDrunk Route Library
                 </Link>
               </div>

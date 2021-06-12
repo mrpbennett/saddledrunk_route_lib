@@ -77,8 +77,8 @@ const Route = (props) => {
         </div>
 
         {/* map and route info block */}
-        <div className='grid grid-cols-2 gap-10'>
-          <div id='map'>
+        <div className='flex flex-col md:flex-row'>
+          <div id='map' className='md:flex-grow md:mr-10'>
             <img
               src={`https://maps.googleapis.com/maps/api/staticmap?size=1000x350&maptype=roadmap&path=enc:${route.map.summary_polyline}&key=${process.env.GATSBY_GOOGLE_MAP_KEY}`}
               className='rounded-md shadow-md w-full'
@@ -109,7 +109,7 @@ const Route = (props) => {
           </div>
 
           {/* route data */}
-          <div id='route' className=''>
+          <div id='route' className='md:w-2/5'>
             {/* profile img and creator */}
 
             <div id='creator-header' className='flex items-center'>
