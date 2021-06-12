@@ -17,6 +17,7 @@ export const query = graphql`
 const Route = (props) => {
   const [route, setRoute] = useState([]);
   const [athlete, setAthlete] = useState([]);
+  const [segments, setSegments] = useState([]);
 
   useEffect(() => {
     const init = async () => {
@@ -42,6 +43,7 @@ const Route = (props) => {
 
         setRoute(secondResponse.data);
         setAthlete(secondResponse.data.athlete);
+        setSegments(secondResponse.data.segments);
       } catch (e) {
         console.log(e);
       }
@@ -83,29 +85,34 @@ const Route = (props) => {
               src={`https://maps.googleapis.com/maps/api/staticmap?size=1000x350&maptype=roadmap&path=enc:${route.map.summary_polyline}&key=${process.env.GATSBY_GOOGLE_MAP_KEY}`}
               className='rounded-md shadow-md w-full'
             />
-            {/* 
+
+            {/* segments */}
             <div>
-              <table className='table-auto'>
-                <thead>
+              <table className='table-fixed text-sm px-2 rounded-t-lg'>
+                <thead className='bg-gray-300 '>
                   <tr>
                     <th>Name</th>
-                    <th>Distance</th>
+                    <th className='text-center'>Distance</th>
+                    <th className='text-center'>Avg. Grade</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {segments.map(({ s }) => {
+                  {segments.slice(0, 10).map((s) => {
                     return (
                       <tr>
                         <td>
-                          <a href={`https://www.strava.com/segments/${s.id}`}>{s.name}</a>
+                          <a href={`https://www.strava.com/segments/${s.id}`} className='font-normal'>
+                            {s.name}
+                          </a>
                         </td>
-                        <td>{s.distance}</td>
+                        <td className='text-center'>{s.distance}</td>
+                        <td className='text-center'>{s.average_grade}%</td>
                       </tr>
                     );
                   })}
                 </tbody>
               </table>
-            </div> */}
+            </div>
           </div>
 
           {/* route data */}
