@@ -147,7 +147,8 @@ const Route = (props) => {
                         <td>
                           <a
                             href={`https://www.strava.com/segments/${s.id}`}
-                            className='font-normal hover:text-blue-500'>
+                            className='font-normal hover:text-blue-500'
+                            target='_blank'>
                             {s.name}
                           </a>
                         </td>

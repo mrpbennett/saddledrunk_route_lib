@@ -57,8 +57,8 @@ const RouteList = (props) => {
                 <td>
                   {[...Array(node.ratingInt)].map(() => {
                     return (
-                      <span role='img' alt='star' className='mr-2 text-xl'>
-                        ⭐️
+                      <span role='img' alt='star' className='mr-2 text-2xl'>
+                        🥵
                       </span>
                     );
                   })}

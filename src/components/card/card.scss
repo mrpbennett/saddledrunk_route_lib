@@ -1,0 +1,70 @@
+.cardContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    width: 100%;
+}
+
+.card {
+    width: 22rem;
+    overflow: hidden;
+    border-radius: 1rem;
+
+    border: solid 0.05rem rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    background-color: #ffffff;
+    color: rgba(0, 0, 0, 0.8);
+
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    img {
+        width: 100%;
+    }
+
+    .cardInner {
+        padding: 1.5rem;
+
+        h4 {
+            margin: 0;
+            margin-top: 0.5rem;
+            font-weight: 600;
+            font-size: 1.125rem;
+            line-height: 1.25;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .cardInfoTop {
+            text-transform: uppercase;
+        }
+
+        .cardInfoMiddle {
+            margin-top: 0.5rem;
+        }
+
+        .cardInfoBottom {
+            display: flex;
+            align-items: center;
+            margin-top: 1rem;
+        }
+    }
+
+    // emphasise
+    .emphasise {
+        font-weight: 500;
+        color: teal;
+    }
+
+    // deemphasised text
+    .deemphasise {
+        font-size: 0.725rem;
+        letter-spacing: 0.025rem;
+        color: rgba(0, 0, 0, 0.6);
+    }
+}
+
+.ml-2 {
+    margin-left: 0.5rem;
+}

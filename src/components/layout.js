@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 const data = [
   {
     to: '/',
-    name: 'home',
+    name: 'Home',
     className:
       'mr-10 text-white capitalize py-2 px-4 rounded  hover:bg-yellow-200 hover:text-black hover:rounded',
   },
@@ -23,12 +23,15 @@ const Layout = ({ children }) => {
     <div className='flex flex-col min-h-screen'>
       <header>
         <nav className='bg-gray-800'>
-          <div className='mx-auto px-2 px-10'>
+          <div className='mx-auto px-8'>
             <div className='relative flex items-center justify-between h-20'>
               <div className='mr-auto'>
-                <Link to='/' className='text-white font-bold hover:text-yellow-200 hidden md:inline'>
-                  SaddleDrunk Route Library
-                </Link>
+                <a
+                  href='https://www.saddledrunk.cc'
+                  className='text-white font-bold hover:text-yellow-200 hidden md:inline'
+                  target='_blank'>
+                  Back to SaddleDrunk CC
+                </a>
               </div>
 
               <div className='flex'>

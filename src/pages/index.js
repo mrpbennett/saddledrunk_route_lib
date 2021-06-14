@@ -4,6 +4,8 @@ import { Link } from 'gatsby';
 import Layout from '../components/layout';
 import SEO from '../components/seo';
 
+import Card from '../components/card/card';
+
 // markup
 const IndexPage = () => {
   return (
@@ -23,30 +25,9 @@ const IndexPage = () => {
           the members can be seen off-road at MTB,CTX & Gravel events. The Club also has an active and growing
           women’s section with regular women only rides.
         </p>
-        <p>
-          The Club members meet regularly for Sunday Club Rides. Throughout the year members organise trips
-          abroad to ride cyclo-sportive events in every corner of the globe.
-        </p>
 
-        <h2>Club Routes</h2>
-        <p>
-          Club Rides generally depart at 09:00 every Sunday, but depending the expected ride duration, length
-          and weather, this may vary to between 8:00 and 10:00. Please gather 5-10 minutes prior to the
-          published start time to ensure a prompt departure. For additional ride details, bunnyhop over to the{' '}
-          <Link to='/route'>route section</Link>
-        </p>
-
-        <div>
-          <p>The Sunday Club Ride will depart from outside of:</p>
-          <div className='flex flex-col'>
-            <span>Munson’s Coffee and Eats</span>
-            <span>73 St Mary's Rd, London W5 5RG</span>
-          </div>
-          <p>
-            Our rides are open to all members of Club. With prior agreement we do permit guest riders to join
-            Club Rides. Please head over to the clubs{' '}
-            <a href='https://www.saddledrunk.cc/contact'>official site</a> to register interest.
-          </p>
+        <div className='mt-10'>
+          <Card />
         </div>
       </div>
     </Layout>

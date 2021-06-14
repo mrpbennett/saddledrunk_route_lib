@@ -10,6 +10,10 @@ module.exports = {
             a: {
               textDecoration: 'none',
             },
+            img: {
+              marginTop: '0px',
+              marginBotton: '0px',
+            },
           },
         },
       },
