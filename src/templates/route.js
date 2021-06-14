@@ -81,6 +81,22 @@ const Route = (props) => {
       });
   };
 
+  const downloadTCX = () => {
+    axios({
+      method: 'GET',
+      url: `https://www.strava.com/api/v3/routes/${props.data.contentfulRoutes.slug}/export_tcx`,
+      headers: { Authorization: `Bearer ${stoken}` },
+      responseType: 'blob',
+    })
+      .then((response) => {
+        console.log(response.data);
+        fileDownload(response.data, `${route.name}.tcx`);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <Layout>
       <SEO title={props.data.contentfulRoutes.routename} />
@@ -91,11 +107,18 @@ const Route = (props) => {
           <div className='mb-5'>
             <h2>{route.name}</h2>
 
-            <button
-              onClick={downloadGPX}
-              className='hidden md:inline py-1 px-3 rounded-lg text-sm text-white font-bold shadow hover:bg-gray-200 hover:text-gray-800 strava-orange'>
-              Get GPX
-            </button>
+            <div className='flex'>
+              <button
+                onClick={downloadGPX}
+                className='hidden md:inline py-1 px-3 rounded-lg text-sm text-white font-bold shadow hover:bg-gray-200 hover:text-gray-800 strava-orange mr-3'>
+                Get GPX
+              </button>
+              <button
+                onClick={downloadTCX}
+                className='hidden md:inline py-1 px-3 rounded-lg text-sm font-bold shadow hover:bg-gray-200 hover:text-gray-800'>
+                Get TCX
+              </button>
+            </div>
           </div>
         </div>
 
@@ -115,7 +138,7 @@ const Route = (props) => {
                 <thead>
                   <tr>
                     <th>Name</th>
-                    <th className='text-center'>Distance km / m</th>
+                    <th className='text-center'>Distance km / mi</th>
                     <th className='text-center'>Avg. Grade</th>
                   </tr>
                 </thead>
@@ -133,7 +156,7 @@ const Route = (props) => {
                         <td className='text-center'>
                           <span className='font-bold'>{parseFloat(s.distance / 1000).toFixed(2)} km</span> /{' '}
                           <span className='font-normal text-gray-500'>
-                            {parseFloat(s.distance / 1609).toFixed(2)} m
+                            {parseFloat(s.distance / 1609).toFixed(2)} mi
                           </span>
                         </td>
                         <td className='text-center'>{s.average_grade}%</td>
