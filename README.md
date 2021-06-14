@@ -17,7 +17,7 @@ The rest is populated via the Strava API.
 
 ## The Route page
 
-![route page]('./img/route.png')
+![route page](./img/route.png)
 
 Everything in the above is populated via the Strava API. The map is generated using the [Google Static Map API](https://developers.google.com/maps/documentation/maps-static/overview) and the `polyline` from the API.
 
