@@ -73,7 +73,6 @@ const Route = (props) => {
       responseType: 'blob',
     })
       .then((response) => {
-        console.log(response.data);
         fileDownload(response.data, `${route.name}.gpx`);
       })
       .catch((err) => {
@@ -89,7 +88,6 @@ const Route = (props) => {
       responseType: 'blob',
     })
       .then((response) => {
-        console.log(response.data);
         fileDownload(response.data, `${route.name}.tcx`);
       })
       .catch((err) => {
