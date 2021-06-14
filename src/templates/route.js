@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { graphql } from 'gatsby';
 import axios from 'axios';
+import fileDownload from 'js-file-download';
 
 import Layout from '../components/layout';
 import SEO from '../components/seo';
@@ -18,6 +19,7 @@ const Route = (props) => {
   const [route, setRoute] = useState([]);
   const [athlete, setAthlete] = useState([]);
   const [segments, setSegments] = useState([]);
+  const [stoken, setSToken] = useState([]);
 
   useEffect(() => {
     const init = async () => {
@@ -44,6 +46,7 @@ const Route = (props) => {
         setRoute(secondResponse.data);
         setAthlete(secondResponse.data.athlete);
         setSegments(secondResponse.data.segments);
+        setSToken(token);
       } catch (e) {
         console.log(e);
       }
@@ -62,37 +65,55 @@ const Route = (props) => {
 
   const createdAt = new Date(route.created_at).toString();
 
+  const downloadGPX = () => {
+    axios({
+      method: 'GET',
+      url: `https://www.strava.com/api/v3/routes/${props.data.contentfulRoutes.slug}/export_gpx`,
+      headers: { Authorization: `Bearer ${stoken}` },
+      responseType: 'blob',
+    })
+      .then((response) => {
+        console.log(response.data);
+        fileDownload(response.data, `${route.name}.gpx`);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <Layout>
       <SEO title={props.data.contentfulRoutes.routename} />
+
       <section>
         {/* route name + gpx btn */}
         <div className='mt-8' id='routename-and-gpx'>
           <div className='mb-5'>
             <h2>{route.name}</h2>
-            <a href='#'>
-              <button className='py-1 px-3 rounded-lg text-sm text-white font-bold shadow hover:bg-gray-200 hover:text-gray-800 strava-orange'>
-                Get GPX
-              </button>
-            </a>
+
+            <button
+              onClick={downloadGPX}
+              className='hidden md:inline py-1 px-3 rounded-lg text-sm text-white font-bold shadow hover:bg-gray-200 hover:text-gray-800 strava-orange'>
+              Get GPX
+            </button>
           </div>
         </div>
 
         {/* map and route info block */}
-        <div className='grid grid-cols-2 gap-10'>
-          <div id='map'>
+        <div className='flex flex-col md:flex-row'>
+          <div id='map' className='md:mr-10'>
             <img
               src={`https://maps.googleapis.com/maps/api/staticmap?size=1000x350&maptype=roadmap&path=enc:${route.map.summary_polyline}&key=${process.env.GATSBY_GOOGLE_MAP_KEY}`}
               className='rounded-md shadow-md w-full'
             />
 
             {/* segments */}
-            <div>
-              <table className='table-fixed text-sm px-2 rounded-t-lg'>
-                <thead className='bg-gray-300 '>
+            <div className='hidden md:inline'>
+              <table className='table-fixed text-sm px-2 '>
+                <thead>
                   <tr>
                     <th>Name</th>
-                    <th className='text-center'>Distance</th>
+                    <th className='text-center'>Distance km / m</th>
                     <th className='text-center'>Avg. Grade</th>
                   </tr>
                 </thead>
@@ -101,11 +122,15 @@ const Route = (props) => {
                     return (
                       <tr>
                         <td>
-                          <a href={`https://www.strava.com/segments/${s.id}`} className='font-normal'>
+                          <a
+                            href={`https://www.strava.com/segments/${s.id}`}
+                            className='font-normal hover:text-blue-500'>
                             {s.name}
                           </a>
                         </td>
-                        <td className='text-center'>{s.distance}</td>
+                        <td className='text-center'>
+                          {Math.round(s.distance / 1000)} km / {Math.round(s.distance / 1609)} m
+                        </td>
                         <td className='text-center'>{s.average_grade}%</td>
                       </tr>
                     );
@@ -116,7 +141,7 @@ const Route = (props) => {
           </div>
 
           {/* route data */}
-          <div id='route' className=''>
+          <div id='route' className='w-full md:w-2/5'>
             {/* profile img and creator */}
 
             <div id='creator-header' className='flex items-center'>

@@ -25,7 +25,7 @@ const Layout = ({ children }) => {
           <div className='mx-auto px-2 px-10'>
             <div className='relative flex items-center justify-between h-20'>
               <div className='mr-auto'>
-                <Link to='/' className='text-white font-bold hover:text-yellow-200'>
+                <Link to='/' className='text-white font-bold hover:text-yellow-200 hidden md:inline'>
                   SaddleDrunk Route Library
                 </Link>
               </div>
@@ -42,7 +42,7 @@ const Layout = ({ children }) => {
         </nav>
       </header>
 
-      <div className='container mx-auto prose flex-grow'>
+      <div className='container mx-auto flex-grow prose prose-sm md:prose'>
         <main>{children}</main>
       </div>
       <footer className='mt-10'>
