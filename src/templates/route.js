@@ -61,9 +61,9 @@ const Route = (props) => {
   const distanceKm = route.distance / 1000;
   const elevationFt = route.elevation_gain * 3.281;
 
-  const estimatedMovingTime = route.estimated_moving_time / 3600;
+  const estimatedMovingTime = Math.round(route.estimated_moving_time / 3600);
 
-  const createdAt = new Date(route.created_at).toString();
+  const createdAt = new Date(route.timestamp * 1000).toLocaleDateString();
 
   const downloadGPX = () => {
     axios({
@@ -105,10 +105,12 @@ const Route = (props) => {
             <img
               src={`https://maps.googleapis.com/maps/api/staticmap?size=1000x350&maptype=roadmap&path=enc:${route.map.summary_polyline}&key=${process.env.GATSBY_GOOGLE_MAP_KEY}`}
               className='rounded-md shadow-md w-full'
+              alt='route map'
             />
 
             {/* segments */}
             <div className='hidden md:inline'>
+              <h2>Segments</h2>
               <table className='table-fixed text-sm px-2 '>
                 <thead>
                   <tr>
@@ -129,7 +131,10 @@ const Route = (props) => {
                           </a>
                         </td>
                         <td className='text-center'>
-                          {Math.round(s.distance / 1000)} km / {Math.round(s.distance / 1609)} m
+                          <span className='font-bold'>{parseFloat(s.distance / 1000).toFixed(2)} km</span> /{' '}
+                          <span className='font-normal text-gray-500'>
+                            {parseFloat(s.distance / 1609).toFixed(2)} m
+                          </span>
                         </td>
                         <td className='text-center'>{s.average_grade}%</td>
                       </tr>
@@ -145,7 +150,7 @@ const Route = (props) => {
             {/* profile img and creator */}
 
             <div id='creator-header' className='flex items-center'>
-              <img src={athlete.profile} className='rounded-full w-16 shadow'></img>
+              <img src={athlete.profile} className='rounded-full w-16 shadow' alt='rider profile' />
 
               <div className='flex flex-col ml-4'>
                 <span>
@@ -175,7 +180,7 @@ const Route = (props) => {
                   <span className='text-xs'>Elevation Gain</span>
                 </div>
                 <div className='flex flex-col'>
-                  <span className='font-bold'>{Math.round(estimatedMovingTime)} hrs</span>
+                  <span className='font-bold'>{estimatedMovingTime} hrs</span>
                   <span className='text-xs'>Estimated Moving Time</span>
                 </div>
               </div>
