@@ -43,7 +43,7 @@ const Layout = ({ children }) => {
         </nav>
       </header>
 
-      <div className='container mx-auto prose flex-grow'>
+      <div className='container mx-auto flex-grow prose prose-sm md:prose'>
         <main>{children}</main>
       </div>
       <footer className='mt-10'>

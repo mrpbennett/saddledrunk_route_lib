@@ -7,6 +7,9 @@ module.exports = {
         DEFAULT: {
           css: {
             maxWidth: '90%',
+            a: {
+              textDecoration: 'none',
+            },
           },
         },
       },
