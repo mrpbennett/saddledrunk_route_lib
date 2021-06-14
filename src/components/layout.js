@@ -8,12 +8,13 @@ const data = [
   {
     to: '/',
     name: 'home',
-    className: 'mr-10 text-white capitalize',
+    className:
+      'mr-10 text-white capitalize py-2 px-4 rounded  hover:bg-yellow-200 hover:text-black hover:rounded',
   },
   {
     to: '/route',
     name: 'Routes',
-    className: 'text-white capitalize',
+    className: 'text-white capitalize py-2 px-4 rounded hover:bg-yellow-200 hover:text-black hover:rounded',
   },
 ];
 

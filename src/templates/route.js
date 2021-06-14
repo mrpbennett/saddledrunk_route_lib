@@ -101,7 +101,7 @@ const Route = (props) => {
 
         {/* map and route info block */}
         <div className='flex flex-col md:flex-row'>
-          <div id='map' className='md:mr-10'>
+          <div id='map' className='md:flex-grow md:mr-10'>
             <img
               src={`https://maps.googleapis.com/maps/api/staticmap?size=1000x350&maptype=roadmap&path=enc:${route.map.summary_polyline}&key=${process.env.GATSBY_GOOGLE_MAP_KEY}`}
               className='rounded-md shadow-md w-full'
